@@ -19,6 +19,7 @@ const slides = [
 
 let slideIndex = 0
 
+//Fonction permettant l'actualisant de l'image, le texte et les bullet points
 function slideUpdate() {
     const bannerImg = document.querySelector('.banner-img')
     const tagLine = document.querySelector('#banner p')
@@ -34,16 +35,19 @@ function slideUpdate() {
     dot[slideIndex].classList.add('dot_selected')
 }
 
+//Fonction permettant le défilement infini du slider
 function slideSwitch(n) {
     slideIndex = (slideIndex + n + slides.length) % slides.length
     slideUpdate()
 }
 
+//Flèche gauche
 const arrowLeft = document.querySelector('.arrow_left')
 arrowLeft.addEventListener('click', function () {
     slideSwitch(-1)
 })
 
+//Flèche droite
 const arrowRight = document.querySelector('.arrow_right')
 arrowRight.addEventListener('click', function () {
     slideSwitch(1)
@@ -51,7 +55,7 @@ arrowRight.addEventListener('click', function () {
 
 const dots = document.querySelector(".dots")
 
-
+//Boucle permettant l'ajout de bullet points en fonction du nombre d'images
 for (let i = 0; i < slides.length; i++) {
     let newDot = document.createElement("div")
     newDot.classList.add("dot")
@@ -63,4 +67,5 @@ for (let i = 0; i < slides.length; i++) {
     })
 }
 
+//Permet d'actualiser le slider dès l'arrivée sur la page
 slideUpdate()
