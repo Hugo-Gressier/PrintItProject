@@ -26,3 +26,11 @@ const arrowRight = document.querySelector('.arrow_right')
 arrowRight.addEventListener('click', function () {
 	alert('Flèche droite')
 })
+
+const dots = document.querySelector(".dots")
+
+for (let newDots = 0; newDots < slides.length; newDots++) {
+	let newDot = document.createElement("div")
+	newDot.classList.add("dot")
+	dots.appendChild(newDot)
+}
