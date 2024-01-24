@@ -1,36 +1,66 @@
 const slides = [
 	{
-		"image":"slide1.jpg",
-		"tagLine":"Impressions tous formats <span>en boutique et en ligne</span>"
+		"image": "./assets/images/slideshow/slide1.jpg",
+		"tagLine": "Impressions tous formats <span>en boutique et en ligne</span>"
 	},
 	{
-		"image":"slide2.jpg",
-		"tagLine":"Tirages haute définition grand format <span>pour vos bureaux et events</span>"
+		"image": "./assets/images/slideshow/slide2.jpg",
+		"tagLine": "Tirages haute définition grand format <span>pour vos bureaux et événements</span>"
 	},
 	{
-		"image":"slide3.jpg",
-		"tagLine":"Grand choix de couleurs <span>de CMJN aux pantones</span>"
+		"image": "./assets/images/slideshow/slide3.jpg",
+		"tagLine": "Grand choix de couleurs <span>de CMJN aux pantones</span>"
 	},
 	{
-		"image":"slide4.png",
-		"tagLine":"Autocollants <span>avec découpe laser sur mesure</span>"
+		"image": "./assets/images/slideshow/slide4.png",
+		"tagLine": "Autocollants <span>avec découpe laser sur mesure</span>"
 	}
 ]
 
+let slideIndex = 0
+
+function slideUpdate() {
+    const bannerImg = document.querySelector('.banner-img')
+    const tagLine = document.querySelector('#banner p')
+    const dot = document.querySelectorAll('.dot')
+
+    bannerImg.src = slides[slideIndex].image
+    tagLine.innerHTML = slides[slideIndex].tagLine
+
+    dot.forEach(dotNotSelected => {
+        dotNotSelected.classList.remove('dot_selected')
+    })
+
+    dot[slideIndex].classList.add('dot_selected')
+}
+
+function slideSwitch(n) {
+    slideIndex = (slideIndex + n + slides.length) % slides.length
+    slideUpdate()
+}
+
 const arrowLeft = document.querySelector('.arrow_left')
 arrowLeft.addEventListener('click', function () {
-	alert('Flèche gauche')
+    slideSwitch(-1)
 })
 
 const arrowRight = document.querySelector('.arrow_right')
 arrowRight.addEventListener('click', function () {
-	alert('Flèche droite')
+    slideSwitch(1)
 })
 
 const dots = document.querySelector(".dots")
 
-for (let newDots = 0; newDots < slides.length; newDots++) {
-	let newDot = document.createElement("div")
-	newDot.classList.add("dot")
-	dots.appendChild(newDot)
+
+for (let i = 0; i < slides.length; i++) {
+    let newDot = document.createElement("div")
+    newDot.classList.add("dot")
+    dots.appendChild(newDot)
+
+    newDot.addEventListener('click', function () {
+        slideIndex = i
+        slideUpdate()
+    })
 }
+
+slideUpdate()
